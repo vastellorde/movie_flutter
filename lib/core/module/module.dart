@@ -25,6 +25,11 @@ abstract class Module {
 
   Future<void> init() async {
     await _initScope();
+
+    for (var module in includes) {
+      await module.init();
+    }
+
     for (var dependency in dependencies) {
       await dependency.register(di);
     }
