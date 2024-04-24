@@ -12,7 +12,7 @@ final class DIGetItScope implements DIScope {
   }
 
   @override
-  Future<void> register() async {
-    await _getIt.pushNewScopeAsync(scopeName: scopeName);
+  void register() {
+    _getIt.pushNewScope(scopeName: scopeName);
   }
 }
