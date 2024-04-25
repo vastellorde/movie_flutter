@@ -1,3 +1,4 @@
+import 'package:movie/core/module/di.dart';
 import 'package:movie/core/module/di_get_it_registrator.dart';
 import 'package:movie/core/module/di_get_it_scope.dart';
 import 'package:movie/core/module/di_registrator.dart';
@@ -8,30 +9,29 @@ abstract class Module {
   Module({
     this.includes = const [],
     this.dependencies = const [],
-  });
+  }) {
+    _initScope();
+    _init();
+  }
 
   final List<Module> includes;
   final List<ModuleDependencies> dependencies;
 
-  final DIRegistrator di = DIGetItRegistrator();
+  final DIRegistrator _diRegistrator = DIGetItRegistrator();
   late final DIScope _scope;
 
   String get _id => '${toString()}Scope';
 
-  Future<void> _initScope() async {
+  DI get di => _diRegistrator;
+
+  void _initScope() {
     _scope = DIGetItScope(scopeName: _id);
     _scope.register();
   }
 
-  Future<void> init() async {
-    await _initScope();
-
-    for (var module in includes) {
-      await module.init();
-    }
-
+  Future<void> _init() async {
     for (var dependency in dependencies) {
-      await dependency.register(di);
+      await dependency.register(_diRegistrator);
     }
   }
 
