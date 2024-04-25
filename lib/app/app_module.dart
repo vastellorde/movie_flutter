@@ -1,5 +1,6 @@
 import 'package:movie/app/router/router_module.dart';
 import 'package:movie/core/http/http_module.dart';
+import 'package:movie/core/infrastructure/logger/logger_module.dart';
 import 'package:movie/core/module/di_registrator.dart';
 import 'package:movie/core/module/module.dart';
 import 'package:movie/core/module/module_dependencies.dart';
@@ -10,6 +11,7 @@ final class AppModule extends Module {
           includes: [
             RouterModule(),
             HttpModule(),
+            LoggerModule(),
           ],
           dependencies: [
             _AppModuleDependencies(),
