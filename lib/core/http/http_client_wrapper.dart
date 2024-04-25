@@ -5,14 +5,14 @@ abstract interface class HttpClientWrapper {
   HttpResult<T> get<T>(
     String url, {
     Object? data,
-    HttpDataParser? parser,
+    required HttpDataParser<T> parser,
     Map<String, dynamic>? params,
   });
 
   HttpResult<T> post<T>(
     String url, {
     Object? data,
-    HttpDataParser? parser,
+    required HttpDataParser<T> parser,
     Map<String, dynamic>? params,
   });
 }
