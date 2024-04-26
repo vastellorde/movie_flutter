@@ -45,3 +45,4 @@ jobs:
           artifacts: "build/app/outputs/flutter-apk/*.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.versionstep.outputs.VERSION }}
+          commit: "release {{ steps.versionstep.outputs.VERSION }}"
