@@ -63,7 +63,7 @@ final class DioHttpClientWrapper implements HttpClientWrapper {
       return Result.failure(
         HttpDataParseFailure(reason: e.message),
       );
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       rethrow;
     }
   }
