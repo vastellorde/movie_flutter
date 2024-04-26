@@ -38,7 +38,7 @@ jobs:
         id: versionstep
         run: |
           VERSION=$(more pubspec.yaml | grep version: | cut -d ' ' -f2)
-          echo "name=VERSION::$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION::$VERSION" >> $GITHUB_OUTPUT
       - name: Create tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
