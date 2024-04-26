@@ -30,7 +30,7 @@ final class _FakeModule extends Module {
 final class _FakeModuleDependencies extends ModuleDependencies {
   @override
   Future<void> register(DIRegistrator di) async {
-    di.factory<_FakeDependency>(() => _FakeDependency());
+    di.factory<_FakeDependency>(_FakeDependency.new);
   }
 }
 
