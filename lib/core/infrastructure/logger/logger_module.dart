@@ -17,12 +17,13 @@ final class LoggerModule extends Module {
 final class _TalkerLoggerModuleDependencies implements ModuleDependencies {
   @override
   Future<void> register(DIRegistrator di) async {
-    di.factory<Talker>(_createTalker);
-    di.lazySingleton<LoggerWrapper>(
-      () => ConsoleLoggerWrapper(
-        talker: di.get<Talker>(),
-      ),
-    );
+    di
+      ..factory<Talker>(_createTalker)
+      ..lazySingleton<LoggerWrapper>(
+        () => ConsoleLoggerWrapper(
+          talker: di.get<Talker>(),
+        ),
+      );
   }
 
   Talker _createTalker() {

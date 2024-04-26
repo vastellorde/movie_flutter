@@ -2,9 +2,9 @@ import 'package:movie/core/infrastructure/logger/logger_wrapper.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 final class ConsoleLoggerWrapper implements LoggerWrapper {
-  final Talker _talker;
-
   const ConsoleLoggerWrapper({required Talker talker}) : _talker = talker;
+
+  final Talker _talker;
 
   @override
   void debug(Object message, {Object? exception, StackTrace? stackTrace}) {
