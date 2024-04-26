@@ -7,6 +7,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +38,7 @@ jobs:
         id: versionstep
         run: |
           VERSION=$(more pubspec.yaml | grep version: | cut -d ' ' -f2)
-          echo "::set-output name=VERSION::$VERSION"
+          echo "name=VERSION::$VERSION" >> $GITHUB_OUTPUT
       - name: Upload artifacts
         uses: ncipollo/release-action@v1
         with:
