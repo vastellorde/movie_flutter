@@ -15,17 +15,37 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    MovieRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MovieFlow(),
+      );
+    },
     MovieListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MovieListScreen(),
+        child: const MovieListScreenWrapper(),
       );
-    }
+    },
   };
 }
 
 /// generated route for
-/// [MovieListScreen]
+/// [MovieFlow]
+class MovieRoute extends PageRouteInfo<void> {
+  const MovieRoute({List<PageRouteInfo>? children})
+      : super(
+          MovieRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MovieRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MovieListScreenWrapper]
 class MovieListRoute extends PageRouteInfo<void> {
   const MovieListRoute({List<PageRouteInfo>? children})
       : super(
