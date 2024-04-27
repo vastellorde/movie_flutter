@@ -30,15 +30,15 @@ abstract class Module {
   }
 
   Future<void> _init() async {
-    for (var dependency in dependencies) {
+    for (final dependency in dependencies) {
       await dependency.register(_diRegistrator);
     }
   }
 
   Future<void> dispose() async {
-    for (var module in includes) {
+    for (final module in includes) {
       await module.dispose();
     }
-    _scope.dispose();
+    await _scope.dispose();
   }
 }

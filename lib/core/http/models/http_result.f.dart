@@ -1,5 +1,5 @@
-import 'package:movie/core/http/models/http_failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movie/core/http/models/http_failure.dart';
 
 part 'http_result.f.freezed.dart';
 

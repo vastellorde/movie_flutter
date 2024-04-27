@@ -1,4 +1,4 @@
-import 'package:get_it/get_it.dart' hide FactoryFunc, DisposingFunc;
+import 'package:get_it/get_it.dart' hide DisposingFunc, FactoryFunc;
 import 'package:movie/core/module/di_registrator.dart';
 
 final class DIGetItRegistrator implements DIRegistrator {

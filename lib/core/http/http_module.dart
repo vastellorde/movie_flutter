@@ -17,14 +17,15 @@ final class HttpModule extends Module {
 final class _DioHttpModuleDependencies implements ModuleDependencies {
   @override
   Future<void> register(DIRegistrator di) async {
-    di.factoryWithParam<Dio, String>(
-      (param) => _createDio(baseUrl: param),
-    );
-    di.lazySingleton<DioHttpClientWrapper>(
-      () => DioHttpClientWrapper(
-        dio: di.getWithParams<Dio, String>('https://api.themoviedb.org/3/'),
-      ),
-    );
+    di
+      ..factoryWithParam<Dio, String>(
+        (param) => _createDio(baseUrl: param),
+      )
+      ..lazySingleton<DioHttpClientWrapper>(
+        () => DioHttpClientWrapper(
+          dio: di.getWithParams<Dio, String>('https://api.themoviedb.org/3/'),
+        ),
+      );
   }
 
   Dio _createDio({String baseUrl = ''}) {

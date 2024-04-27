@@ -19,12 +19,13 @@ final class DioHttpClientWrapper implements HttpClientWrapper {
     Map<String, dynamic>? params,
   }) async {
     final response = await _processRequest(
-        makeRequest: () => _dio.get<Map<String, dynamic>>(
-              url,
-              data: data,
-              queryParameters: params,
-            ),
-        parser: parser);
+      makeRequest: () => _dio.get<Map<String, dynamic>>(
+        url,
+        data: data,
+        queryParameters: params,
+      ),
+      parser: parser,
+    );
 
     return response;
   }
@@ -32,17 +33,18 @@ final class DioHttpClientWrapper implements HttpClientWrapper {
   @override
   HttpResult<T> post<T>(
     String url, {
-    Object? data,
     required HttpDataParser<T> parser,
+    Object? data,
     Map<String, dynamic>? params,
   }) async {
     final response = await _processRequest(
-        makeRequest: () => _dio.post<Map<String, dynamic>>(
-              url,
-              data: data,
-              queryParameters: params,
-            ),
-        parser: parser);
+      makeRequest: () => _dio.post<Map<String, dynamic>>(
+        url,
+        data: data,
+        queryParameters: params,
+      ),
+      parser: parser,
+    );
 
     return response;
   }
@@ -63,7 +65,7 @@ final class DioHttpClientWrapper implements HttpClientWrapper {
       return Result.failure(
         HttpDataParseFailure(reason: e.message),
       );
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       rethrow;
     }
   }
