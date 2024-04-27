@@ -10,3 +10,6 @@ targets:
         options:
           field_rename: snake
           create_to_json: false
+      envied_generator:
+        generate_for:
+          - lib/app/env/env.dart

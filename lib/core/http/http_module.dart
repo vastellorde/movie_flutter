@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:movie/app/env/env.dart';
 import 'package:movie/core/http/dio_http_client_wrapper.dart';
 import 'package:movie/core/http/http_client_wrapper.dart';
 import 'package:movie/core/module/di_registrator.dart';
@@ -34,8 +35,21 @@ final class _DioHttpModuleDependencies implements ModuleDependencies {
 
     dio.options.baseUrl = baseUrl;
 
+    dio.interceptors.add(_AuthInterceptor());
+
     dio.httpClientAdapter = NativeAdapter();
 
     return dio;
+  }
+}
+
+final class _AuthInterceptor extends Interceptor {
+  @override
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) {
+    options.headers['Authorization'] = 'Bearer ${Env.tmdbToken}';
+    super.onRequest(options, handler);
   }
 }

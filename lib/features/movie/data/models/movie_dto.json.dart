@@ -8,7 +8,7 @@ final class MovieDto {
   const MovieDto({
     required this.adult,
     required this.backdropPath,
-    required this.genreId,
+    required this.genreIds,
     required this.id,
     required this.originalLanguage,
     required this.originalTitle,
@@ -27,7 +27,7 @@ final class MovieDto {
 
   final bool adult;
   final String backdropPath;
-  final List<int> genreId;
+  final List<int> genreIds;
   final int id;
   final String originalLanguage;
   final String originalTitle;
@@ -44,7 +44,7 @@ final class MovieDto {
     return Movie(
       adult: adult,
       backdropPath: backdropPath,
-      genreId: genreId,
+      genreId: genreIds,
       id: id,
       originalLanguage: originalLanguage,
       originalTitle: originalTitle,
