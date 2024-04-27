@@ -11,7 +11,6 @@ abstract class Module {
     this.dependencies = const [],
   }) {
     _initScope();
-    _init();
   }
 
   final List<Module> includes;
@@ -20,19 +19,29 @@ abstract class Module {
   final DIRegistrator _diRegistrator = DIGetItRegistrator();
   late final DIScope _scope;
 
+  bool _allreadyRegistered = false;
+
   String get _id => '${toString()}Scope';
 
   DI get di => _diRegistrator;
 
   void _initScope() {
     _scope = DIGetItScope(scopeName: _id);
-    _scope.register();
+    _allreadyRegistered = !_scope.register();
   }
 
-  Future<void> _init() async {
+  Future<bool> init() async {
+    if (_allreadyRegistered) {
+      return true;
+    }
+    for (final module in includes) {
+      await module.init();
+    }
     for (final dependency in dependencies) {
       await dependency.register(_diRegistrator);
     }
+
+    return true;
   }
 
   Future<void> dispose() async {

@@ -1,4 +1,4 @@
 abstract interface class DIScope {
-  void register();
+  bool register();
   Future<void> dispose();
 }

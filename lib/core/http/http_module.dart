@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie/core/http/dio_http_client_wrapper.dart';
+import 'package:movie/core/http/http_client_wrapper.dart';
 import 'package:movie/core/module/di_registrator.dart';
 import 'package:movie/core/module/module.dart';
 import 'package:movie/core/module/module_dependencies.dart';
@@ -21,7 +22,7 @@ final class _DioHttpModuleDependencies implements ModuleDependencies {
       ..factoryWithParam<Dio, String>(
         (param) => _createDio(baseUrl: param),
       )
-      ..lazySingleton<DioHttpClientWrapper>(
+      ..lazySingleton<HttpClientWrapper>(
         () => DioHttpClientWrapper(
           dio: di.getWithParams<Dio, String>('https://api.themoviedb.org/3/'),
         ),

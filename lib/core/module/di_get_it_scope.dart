@@ -12,7 +12,12 @@ final class DIGetItScope implements DIScope {
   }
 
   @override
-  void register() {
+  bool register() {
+    if (_getIt.hasScope(scopeName)) {
+      return false;
+    }
     _getIt.pushNewScope(scopeName: scopeName);
+
+    return true;
   }
 }
