@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/features/movie/presentation/movie_list/state/movie_list_bloc.dart';
+import 'package:movie/features/movie/presentation/movie_list/ui/widgets/movie_list_view.dart';
 
 class MovieListScreen extends StatelessWidget {
   const MovieListScreen({super.key});
@@ -15,13 +16,8 @@ class MovieListScreen extends StatelessWidget {
         builder: (context, state) {
           return switch (state) {
             LoadingMovieListState() => const CircularProgressIndicator(),
-            LoadedMovieListState() => ListView.builder(
-                itemBuilder: (context, index) {
-                  return Text(
-                    state.list[index].title,
-                  );
-                },
-                itemCount: state.list.length,
+            LoadedMovieListState(:final list) => MovieListView(
+                movieList: list,
               ),
             FailedMovieListState(:final reason) => Text(reason),
           };
