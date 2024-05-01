@@ -5,7 +5,7 @@ import 'package:movie/core/module/module_factory.dart';
 import 'package:movie/features/movie/di/movie_module.dart';
 
 @RoutePage()
-class MovieFlow extends StatefulWidget {
+class MovieFlow extends StatelessWidget {
   const MovieFlow({super.key});
 
   static AutoRoute route = AutoRoute(
@@ -17,30 +17,20 @@ class MovieFlow extends StatefulWidget {
         page: MovieListRoute.page,
         path: 'list',
       ),
+      AutoRoute(
+        page: MovieDetailsRoute.page,
+        path: 'details/:id',
+      ),
       RedirectRoute(path: '', redirectTo: 'list'),
     ],
   );
-
-  @override
-  State<MovieFlow> createState() => _MovieFlowState();
-}
-
-class _MovieFlowState extends State<MovieFlow> {
-  @override
-  void initState() {
-    //context.router.push(const MovieListRoute());
-    debugPrint('wtf?');
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return ModuleFactory(
       module: MovieModule(),
       builder: (context, _) {
-        return const AutoRouter(
-          inheritNavigatorObservers: false,
-        );
+        return const AutoRouter();
       },
     );
   }

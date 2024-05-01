@@ -13,12 +13,11 @@ abstract class Runner {
     await appModule.init();
     appModule.di.get<LoggerWrapper>().info('Initialized');
     final talker = appModule.di.get<Talker>();
-    final observer = TalkerRouteObserver(talker);
     Bloc.observer = TalkerBlocObserver(talker: talker);
     runApp(
       MyApp(
         router: appModule.di.get<AppRouter>(),
-        navigatorObserver: observer,
+        talker: talker,
       ),
     );
   }

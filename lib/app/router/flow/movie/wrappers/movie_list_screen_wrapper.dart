@@ -20,7 +20,11 @@ class MovieListScreenWrapper extends StatelessWidget {
             ..add(
               const MovieListRequestedEvent(),
             ),
-          child: const MovieListScreen(),
+          child: MovieListScreen(
+            onMoviePressed: (id) {
+              context.router.pushNamed('/movie/details/$id');
+            },
+          ),
         );
       },
     );
