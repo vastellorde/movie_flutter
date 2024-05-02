@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie/core/infrastructure/logger/logger_wrapper.dart';
 import 'package:movie/core/module/di.dart';
 import 'package:movie/core/module/module.dart';
 
@@ -26,17 +25,20 @@ class _ModuleFactoryState extends State<ModuleFactory> {
 
   @override
   Widget build(BuildContext context) {
+    final builder = widget.builder(
+      context,
+      widget.module.di,
+    );
+
+    if (widget.module.isInitialized) {
+      return builder;
+    }
+
     return FutureBuilder<bool>(
       future: widget.module.init(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          widget.module.di.get<LoggerWrapper>().info(
-                '${widget.module} initialized',
-              );
-          return widget.builder(
-            context,
-            widget.module.di,
-          );
+          return builder;
         }
         return const SizedBox.shrink();
       },

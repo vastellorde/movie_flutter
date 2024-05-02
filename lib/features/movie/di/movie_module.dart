@@ -1,4 +1,5 @@
 import 'package:movie/core/http/http_client_wrapper.dart';
+import 'package:movie/core/module/di_get_it_scope.dart';
 import 'package:movie/core/module/di_registrator.dart';
 import 'package:movie/core/module/module.dart';
 import 'package:movie/core/module/module_dependencies.dart';
@@ -9,11 +10,15 @@ import 'package:movie/features/movie/domain/repository/movie_list_repository.dar
 class MovieModule extends Module {
   MovieModule()
       : super(
+          scope: DIGetItScope(scopeName: _id),
+          id: _id,
           dependencies: const [
             _MovieDataModuleDependencies(),
             _MovieDomainModuleDependencies(),
           ],
         );
+
+  static const String _id = 'MovieModule';
 }
 
 final class _MovieDataModuleDependencies implements ModuleDependencies {

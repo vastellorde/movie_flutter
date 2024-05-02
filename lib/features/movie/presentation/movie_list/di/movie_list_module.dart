@@ -1,3 +1,4 @@
+import 'package:movie/core/module/di_get_it_scope.dart';
 import 'package:movie/core/module/di_registrator.dart';
 import 'package:movie/core/module/module.dart';
 import 'package:movie/core/module/module_dependencies.dart';
@@ -8,11 +9,15 @@ import 'package:movie/features/movie/presentation/movie_list/state/movie_list_bl
 final class MovieListModule extends Module {
   MovieListModule()
       : super(
+          scope: DIGetItScope(scopeName: _id),
+          id: _id,
           dependencies: const [
             _MovieListDomainModuleDependencies(),
             _MovieListPresentationModuleDependencies(),
           ],
         );
+
+  static const String _id = 'MovieListModule';
 }
 
 final class _MovieListDomainModuleDependencies implements ModuleDependencies {
@@ -31,6 +36,7 @@ final class _MovieListDomainModuleDependencies implements ModuleDependencies {
 final class _MovieListPresentationModuleDependencies
     implements ModuleDependencies {
   const _MovieListPresentationModuleDependencies();
+
   @override
   Future<void> register(DIRegistrator di) async {
     di.factory<MovieListBloc>(

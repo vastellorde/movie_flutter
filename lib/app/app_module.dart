@@ -1,6 +1,7 @@
 import 'package:movie/app/router/router_module.dart';
 import 'package:movie/core/http/http_module.dart';
 import 'package:movie/core/infrastructure/logger/logger_module.dart';
+import 'package:movie/core/module/di_get_it_scope.dart';
 import 'package:movie/core/module/di_registrator.dart';
 import 'package:movie/core/module/module.dart';
 import 'package:movie/core/module/module_dependencies.dart';
@@ -8,6 +9,8 @@ import 'package:movie/core/module/module_dependencies.dart';
 final class AppModule extends Module {
   AppModule()
       : super(
+          scope: DIGetItScope(scopeName: _id),
+          id: _id,
           includes: [
             RouterModule(),
             HttpModule(),
@@ -17,6 +20,8 @@ final class AppModule extends Module {
             _AppModuleDependencies(),
           ],
         );
+
+  static const String _id = 'AppModule';
 }
 
 final class _AppModuleDependencies implements ModuleDependencies {

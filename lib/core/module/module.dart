@@ -1,45 +1,50 @@
 import 'package:movie/core/module/di.dart';
 import 'package:movie/core/module/di_get_it_registrator.dart';
-import 'package:movie/core/module/di_get_it_scope.dart';
 import 'package:movie/core/module/di_registrator.dart';
 import 'package:movie/core/module/di_scope.dart';
 import 'package:movie/core/module/module_dependencies.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 abstract class Module {
   Module({
+    required DIScope scope,
+    required this.id,
     this.includes = const [],
     this.dependencies = const [],
-  }) {
-    _initScope();
-  }
+  }) : _scope = scope;
 
   final List<Module> includes;
   final List<ModuleDependencies> dependencies;
+  final String id;
 
   final DIRegistrator _diRegistrator = DIGetItRegistrator();
-  late final DIScope _scope;
+  final DIScope _scope;
 
-  bool _allreadyRegistered = false;
+  bool _isInitialized = false;
 
-  String get _id => '${toString()}Scope';
+  final Talker _talker = TalkerFlutter.init();
 
   DI get di => _diRegistrator;
+  bool get isInitialized => _isInitialized;
 
   void _initScope() {
-    _scope = DIGetItScope(scopeName: _id);
-    _allreadyRegistered = !_scope.register();
+    _scope.register();
+    _talker.info('$id: init scope');
   }
 
   Future<bool> init() async {
-    if (_allreadyRegistered) {
-      return true;
-    }
+    _initScope();
+
     for (final module in includes) {
       await module.init();
     }
     for (final dependency in dependencies) {
       await dependency.register(_diRegistrator);
     }
+
+    _talker.info('$id: init dependencies');
+
+    _isInitialized = true;
 
     return true;
   }
@@ -49,5 +54,6 @@ abstract class Module {
       await module.dispose();
     }
     await _scope.dispose();
+    _talker.info('$id: dispose');
   }
 }
