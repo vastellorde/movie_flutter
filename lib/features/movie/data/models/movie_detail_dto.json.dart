@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movie/features/genre_list/data/models/genre_dto.json.dart';
+import 'package:movie/features/movie/domain/models/movie_detail.dart';
 
 part 'movie_detail_dto.json.g.dart';
 
@@ -63,6 +64,33 @@ class MovieDetailDto {
   final bool video;
   final double voteAverage;
   final int voteCount;
+
+  MovieDetail toDomain() {
+    return MovieDetail(
+      adult: adult,
+      backdropPath: backdropPath,
+      belongsToCollection: belongsToCollection,
+      budget: budget,
+      homepage: homepage,
+      id: id,
+      imdbId: imdbId,
+      originCountry: originCountry,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      releaseDate: releaseDate,
+      revenue: revenue,
+      runtime: runtime,
+      status: status,
+      tagline: tagline,
+      title: title,
+      video: video,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
+  }
 }
 
 @JsonSerializable()
@@ -86,14 +114,14 @@ class ProductionCompanyDto {
 @JsonSerializable()
 class ProductionCountryDto {
   const ProductionCountryDto({
-    required this.iso31661,
     required this.name,
+    this.iso31661,
   });
 
   factory ProductionCountryDto.fromJson(Map<String, dynamic> json) =>
       _$ProductionCountryDtoFromJson(json);
 
-  final String iso31661;
+  final String? iso31661;
   final String name;
 }
 
@@ -101,14 +129,14 @@ class ProductionCountryDto {
 class SpokenLanguageDto {
   const SpokenLanguageDto({
     required this.englishName,
-    required this.iso6391,
     required this.name,
+    this.iso6391,
   });
 
   factory SpokenLanguageDto.fromJson(Map<String, dynamic> json) =>
       _$SpokenLanguageDtoFromJson(json);
 
   final String englishName;
-  final String iso6391;
+  final String? iso6391;
   final String name;
 }

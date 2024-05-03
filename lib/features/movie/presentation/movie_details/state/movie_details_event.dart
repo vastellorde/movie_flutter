@@ -6,3 +6,9 @@ sealed class MovieDetailsEvent with EquatableMixin {
   @override
   List<Object?> get props => [];
 }
+
+final class MovieDetailsRequestedEvent extends MovieDetailsEvent {
+  const MovieDetailsRequestedEvent(this.movieId);
+
+  final int movieId;
+}
