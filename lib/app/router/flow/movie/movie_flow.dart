@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/app/router/router.dart';
-import 'package:movie/core/module/module_factory.dart';
+import 'package:movie/core/module/module_builder.dart';
 import 'package:movie/features/movie/di/movie_module.dart';
 
 @RoutePage()
@@ -27,8 +27,8 @@ class MovieFlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ModuleFactory(
-      module: MovieModule(),
+    return ModuleBuilder(
+      create: MovieModule.new,
       builder: (context, _) {
         return const AutoRouter();
       },
