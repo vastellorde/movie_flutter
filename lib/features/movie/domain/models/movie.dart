@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 final class Movie with EquatableMixin {
   const Movie({
     required this.adult,
-    required this.backdropPath,
     required this.genreId,
     required this.id,
     required this.originalLanguage,
@@ -16,10 +15,11 @@ final class Movie with EquatableMixin {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    this.backdropPath,
   });
 
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final List<int> genreId;
   final int id;
   final String originalLanguage;

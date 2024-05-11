@@ -16,10 +16,7 @@ class MovieListScreenWrapper extends StatelessWidget {
       create: MovieListModule.new,
       builder: (context, di) {
         return BlocProvider<MovieListBloc>(
-          create: (context) => di.get<MovieListBloc>()
-            ..add(
-              const MovieListRequestedEvent(),
-            ),
+          create: (context) => di.get<MovieListBloc>(),
           child: MovieListScreen(
             onMoviePressed: (id) {
               context.router.pushNamed('/movie/details/$id');

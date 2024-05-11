@@ -8,5 +8,7 @@ sealed class MovieListEvent with EquatableMixin {
 }
 
 final class MovieListRequestedEvent extends MovieListEvent {
-  const MovieListRequestedEvent();
+  const MovieListRequestedEvent(this.page);
+
+  final int page;
 }

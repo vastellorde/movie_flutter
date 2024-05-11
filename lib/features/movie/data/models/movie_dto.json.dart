@@ -7,7 +7,6 @@ part 'movie_dto.json.g.dart';
 final class MovieDto {
   const MovieDto({
     required this.adult,
-    required this.backdropPath,
     required this.genreIds,
     required this.id,
     required this.originalLanguage,
@@ -20,13 +19,14 @@ final class MovieDto {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    this.backdropPath,
   });
 
   factory MovieDto.fromJson(Map<String, dynamic> json) =>
       _$MovieDtoFromJson(json);
 
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final List<int> genreIds;
   final int id;
   final String originalLanguage;

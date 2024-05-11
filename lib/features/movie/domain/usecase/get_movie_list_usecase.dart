@@ -5,14 +5,20 @@ import 'package:movie/features/movie/domain/models/movie.dart';
 import 'package:movie/features/movie/domain/repository/movie_list_repository.dart';
 
 final class GetMovieListUsecase
-    implements FetchUsecase<EmptyUsecaseParams, Paged<Movie>> {
+    implements FetchUsecase<GetMovieListUsecaseParams, Paged<Movie>> {
   const GetMovieListUsecase({required MovieListRepository repository})
       : _repository = repository;
 
   final MovieListRepository _repository;
 
   @override
-  HttpResult<Paged<Movie>> invoke(EmptyUsecaseParams params) {
-    return _repository.getMovieList();
+  HttpResult<Paged<Movie>> invoke(GetMovieListUsecaseParams params) {
+    return _repository.getMovieList(params.page);
   }
+}
+
+final class GetMovieListUsecaseParams {
+  const GetMovieListUsecaseParams(this.page);
+
+  final int page;
 }

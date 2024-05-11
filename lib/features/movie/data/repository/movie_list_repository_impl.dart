@@ -10,8 +10,8 @@ final class MovieListRepositoryImpl implements MovieListRepository {
   }) : _remoteDatasource = remoteDatasource;
   final MovieListRemoteDatasource _remoteDatasource;
   @override
-  HttpResult<Paged<Movie>> getMovieList() async {
-    final response = await _remoteDatasource.getMovieList();
+  HttpResult<Paged<Movie>> getMovieList(int page) async {
+    final response = await _remoteDatasource.getMovieList(page);
 
     return response.fold(
       onFailure: Result.failure,

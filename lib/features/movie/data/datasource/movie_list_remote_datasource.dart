@@ -5,7 +5,7 @@ import 'package:movie/core/models/paged/paged_dto.json.dart';
 import 'package:movie/features/movie/data/models/movie_dto.json.dart';
 
 abstract interface class MovieListRemoteDatasource {
-  HttpResult<PagedDto<MovieDto>> getMovieList();
+  HttpResult<PagedDto<MovieDto>> getMovieList(int page);
 }
 
 final class MovieListRemoteDatasourceImpl implements MovieListRemoteDatasource {
@@ -14,7 +14,7 @@ final class MovieListRemoteDatasourceImpl implements MovieListRemoteDatasource {
   final HttpClientWrapper _client;
 
   @override
-  HttpResult<PagedDto<MovieDto>> getMovieList() {
+  HttpResult<PagedDto<MovieDto>> getMovieList(int page) {
     return _client.get<PagedDto<MovieDto>>(
       'discover/movie',
       parser: HttpDataParser(
@@ -23,6 +23,9 @@ final class MovieListRemoteDatasourceImpl implements MovieListRemoteDatasource {
           (json1) => MovieDto.fromJson(json1 ?? {}),
         ),
       ),
+      params: {
+        'page': page,
+      },
     );
   }
 }
